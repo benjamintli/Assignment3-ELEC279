@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Guessmaster V3</string>
+    <string name="ticket">Total Tickets: %1$d</string>
+    <string name="guess_button">Submit Guess</string>
+    <string name="next_entity">Next Entity</string>
+
+    <string name="title_activity_startup_screen">startup_screen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="play_game">START</string>
+</resources>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.benjamin.guessmaster.GuessMaster"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/gradient">
+
+    <TextView
+        android:id="@+id/tickets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ticket"
+        android:textSize="24dp"
+        tools:layout_editor_absoluteX="305dp"
+        android:paddingBottom="15dp"
+        android:textColor="@color/white"/>
+
+    <ImageView
+        android:id="@+id/entityImage"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:foregroundGravity="top"
+        app:srcCompat="@drawable/justint"
+        tools:gravity = "center_horizontal"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/entityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shitty UI"
+            android:gravity="center_horizontal"
+            android:textSize="32dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date"
+            android:gravity="center"
+            android:text="MM/DD/YYYY"
+            android:textColor="@color/white"
+            android:background="@null"
+            android:paddingBottom="10dp"/>
+
+        <TableRow>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/guess_button"
+                android:layout_weight="1"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="10dp"
+                android:id="@+id/guessButton"
+                android:background="@drawable/transparent"
+                android:textColor="@color/white"/>
+            <Button
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="@string/next_entity"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="5dp"
+                android:id = "@+id/nextEntity"
+                android:background="@drawable/transparent"
+                android:textColor="@color/white"/>
+        </TableRow>
+    </TableLayout>
+
+
+
+
+
+</LinearLayout>
