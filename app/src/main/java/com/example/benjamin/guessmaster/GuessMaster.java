@@ -27,7 +27,7 @@ import java.util.Random;
 /**
  * This is the main class than runs the entity suite of classes. plays the guessmaster game with the user where they guess stuff
 *@author Benjamin Li
-*@since 2018-03-03
+*@since 2018-03-29
  * @see Person
  * @see Entity
  * @see Country
@@ -51,12 +51,6 @@ public final class GuessMaster extends AppCompatActivity{
 		numOfEntities = 0;
 		entities = new Entity[10];
 	}
-
-	/** constructor
-	*@param numOfEntities is an int with number of entities in list
-	*@param entities is an ArrayList that wraps Entity objects
-    */
-
 
 	/** add entity to the ArrayList
 	*@param entity is of the type Entity
