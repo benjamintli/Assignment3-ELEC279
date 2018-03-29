@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -21,7 +22,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.Random;
 
 /**
@@ -46,6 +46,7 @@ public final class GuessMaster extends AppCompatActivity{
 	private ImageView entityImage;
 	private EditText userIn;
 	private int id;
+
 
 	public GuessMaster() {
 		numOfEntities = 0;
@@ -76,19 +77,22 @@ public final class GuessMaster extends AppCompatActivity{
      */
 	public void playGame(Entity entity) {
 		String in = userIn.getText().toString();
-		Date date = new Date(in);
-
-		if (date.precedes(entity.getDate())) {
-			dialogLater();
+		try {
+			Date date = new Date(in);
+			if (date.precedes(entity.getDate())) {
+				dialogLater();
+			}
+			else if (entity.getDate().precedes(date)) {
+				dialogEarlier();
+			}
+			else {
+				totalTickets += entity.getAwardedTicketNumber();
+				dialogCorrect(entity);
+			}
 		}
-		else if (entity.getDate().precedes(date)) {
-			dialogEarlier();
+		catch (Exception e){
+			incorrectDialog();
 		}
-		else {
-			totalTickets += entity.getAwardedTicketNumber();
-			dialogCorrect(entity);
-		}
-
 		ticketTotal.setText(getString(R.string.ticket, totalTickets));
    	}
 
@@ -144,7 +148,7 @@ public final class GuessMaster extends AppCompatActivity{
 
 	public void welcomeToGame(Entity entity) {
 		AlertDialog.Builder welcome = new AlertDialog.Builder(GuessMaster.this);
-		welcome.setTitle("GuessMaster_Game_V3")
+		welcome.setTitle("GuessMaster Game V3")
 				.setMessage(entity.welcomeMessage())
 				.setCancelable(false)
 				.setNegativeButton("Start game", new DialogInterface.OnClickListener(){
@@ -155,6 +159,11 @@ public final class GuessMaster extends AppCompatActivity{
 		});
 		AlertDialog dialog = welcome.create();
 		dialog.show();
+		Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf");
+		TextView message = (TextView) dialog.getWindow().findViewById(android.R.id.message);
+		TextView title = (TextView) dialog.getWindow().findViewById(android.R.id.message);
+		message.setTypeface(font);
+		title.setTypeface(font);
 		entityName.setText(entities[id].getName());
 		imageSetter(id);
 	}
@@ -171,6 +180,11 @@ public final class GuessMaster extends AppCompatActivity{
 		});
 		AlertDialog dialog = dialogLater.create();
 		dialog.show();
+		Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf");
+		TextView message = (TextView) dialog.getWindow().findViewById(android.R.id.message);
+		TextView title = (TextView) dialog.getWindow().findViewById(android.R.id.message);
+		message.setTypeface(font);
+		title.setTypeface(font);
 	}
 
 	public void dialogEarlier() {
@@ -185,6 +199,11 @@ public final class GuessMaster extends AppCompatActivity{
 		});
 		AlertDialog dialog = dialogEarlier.create();
 		dialog.show();
+		Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf");
+		TextView message = (TextView) dialog.getWindow().findViewById(android.R.id.message);
+		TextView title = (TextView) dialog.getWindow().findViewById(android.R.id.message);
+		message.setTypeface(font);
+		title.setTypeface(font);
 	}
 
 	public void dialogCorrect(final Entity entity) {
@@ -199,6 +218,25 @@ public final class GuessMaster extends AppCompatActivity{
 			}
 		});
 		AlertDialog dialog = correct.create();
+		dialog.show();
+		Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf");
+		TextView message = (TextView) dialog.getWindow().findViewById(android.R.id.message);
+		TextView title = (TextView) dialog.getWindow().findViewById(android.R.id.message);
+		message.setTypeface(font);
+		title.setTypeface(font);
+	}
+
+	public void incorrectDialog(){
+		AlertDialog.Builder welcome = new AlertDialog.Builder(GuessMaster.this);
+		welcome.setTitle("Invalid Format")
+				.setMessage("Enter date as MM/DD/YYYY")
+				.setCancelable(false)
+				.setNegativeButton("OK", new DialogInterface.OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+					}
+				});
+		AlertDialog dialog = welcome.create();
 		dialog.show();
 	}
 
@@ -216,14 +254,22 @@ public final class GuessMaster extends AppCompatActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		android.support.v7.app.ActionBar ab = getSupportActionBar();
-		ab.setTitle("Guessmaster V3");
+		ab.setTitle(R.string.app_name);
 		guessButton = (Button) findViewById(R.id.guessButton);
 		nextEntity = (Button) findViewById(R.id.nextEntity);
 		userIn = (EditText) findViewById(R.id.date);
 		entityImage = (ImageView) findViewById(R.id.entityImage);
 		ticketTotal = (TextView) findViewById(R.id.tickets);
 		entityName = (TextView) findViewById(R.id.entityName);
-		Politician trudeau = new Politician("Justin  Trudeau", new Date("December", 25, 1971), 0.25, "Male", "Liberal");
+		Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf");
+		entityName.setTypeface(font);
+		ticketTotal.setTypeface(font);
+		guessButton.setTypeface(font);
+		nextEntity.setTypeface(font);
+		userIn.setTypeface(font);
+
+
+		Politician trudeau = new Politician("Justin Trudeau", new Date("December", 25, 1971), 0.25, "Male", "Liberal");
 		Singer dion = new Singer("Celine Dion", new Date("March", 30, 1961), 0.5, "Female", "La voix du bon Dieu", new Date("November", 6, 1981));
 		Country usa = new Country("United States", new Date("July", 4, 1776), 0.1, "Washington D.C.");
 		Person kendrickLamar = new Person ("Kendrick Lamar", new Date ("June", 17, 1987), 0.5, "Male");

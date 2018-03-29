@@ -1,6 +1,7 @@
 package com.example.benjamin.guessmaster;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,9 @@ public class StartScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
+        TextView textView = (TextView) findViewById(R.id.start_title);
+        Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf");
+        textView.setTypeface(font);
 //        int titleId = getResources().getIdentifier("action_bar_title", "id", "android");
 //        TextView textView = (TextView) findViewById(titleId);
 //        textView.setTextColor(getResources().getColor(R.color.light_green));
@@ -28,10 +32,7 @@ public class StartScreen extends AppCompatActivity {
                 StartScreen.this.startActivity(myIntent);
             }
         });
-
-        TextView textView = (TextView) findViewById(R.id.start_title);
-        textView.animate().alpha(1f).setDuration(1000);
-        start.animate().alpha(1f).setDuration(1000);
+        start.setTypeface(font);
 
     }
 }

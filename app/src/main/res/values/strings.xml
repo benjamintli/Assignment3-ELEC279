@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Guessmaster V3</string>
+    <string name="app_name">GuessMaster V3</string>
     <string name="ticket">Total Tickets: %1$d</string>
     <string name="guess_button">Submit Guess</string>
     <string name="next_entity">Next Entity</string>
