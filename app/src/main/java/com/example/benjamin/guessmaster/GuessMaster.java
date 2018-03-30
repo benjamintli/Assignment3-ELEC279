@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
@@ -103,7 +104,8 @@ public final class GuessMaster extends AppCompatActivity{
 		playGame(entities[entityId]);
 	}
 
-    /**plays the game with a random entity from the ArrayList
+    /**continue game and changeEntity() combined into one method
+     *
      */
 	public void continueGame() {
 		Random rand = new Random();
@@ -113,6 +115,7 @@ public final class GuessMaster extends AppCompatActivity{
 		imageSetter(id);
 		entityName.setText(entities[id].getName());
 		userIn.getText().clear();
+		userIn.setText("MM/DD/YYYY");
 		setId(id);
 	}
 
@@ -124,6 +127,7 @@ public final class GuessMaster extends AppCompatActivity{
 		dr.setCornerRadius(Math.max(src.getWidth(), src.getHeight()) / 2.0f);
 		entityImage.setImageDrawable(dr);
 	}
+
 	public void imageSetter(int index){
 		switch (index){
 			case 0:
@@ -234,10 +238,17 @@ public final class GuessMaster extends AppCompatActivity{
 				.setNegativeButton("OK", new DialogInterface.OnClickListener(){
 					@Override
 					public void onClick(DialogInterface dialogInterface, int i) {
+						userIn.getText().clear();
+						userIn.setText(R.string.format);
 					}
 				});
 		AlertDialog dialog = welcome.create();
 		dialog.show();
+        Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf");
+        TextView message = (TextView) dialog.getWindow().findViewById(android.R.id.message);
+        TextView title = (TextView) dialog.getWindow().findViewById(android.R.id.message);
+        message.setTypeface(font);
+        title.setTypeface(font);
 	}
 
 	public int getId(){
@@ -288,7 +299,8 @@ public final class GuessMaster extends AppCompatActivity{
 		userIn.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View view) {
-				userIn.setText("");
+			    if (userIn.getText().toString().equals("MM/DD/YYYY"))
+			        userIn.setText("");
 			}
 		});
 

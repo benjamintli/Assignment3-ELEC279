@@ -48,7 +48,7 @@
             android:ems="10"
             android:inputType="date"
             android:gravity="center"
-            android:text="MM/DD/YYYY"
+            android:text="@string/format"
             android:textColor="@color/white"
             android:background="@null"
             android:paddingBottom="10dp"/>

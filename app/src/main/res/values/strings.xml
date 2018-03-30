@@ -9,4 +9,5 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
     <string name="play_game">START</string>
+    <string name="format">MM/DD/YYYY</string>
 </resources>
