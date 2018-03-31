@@ -26,7 +26,8 @@ import android.widget.Toast;
 import java.util.Random;
 
 /**
- * This is the main class than runs the entity suite of classes. plays the guessmaster game with the user where they guess stuff
+ * This is the main class than runs the entity suite of classes. displays information on an XML GUI.
+ * This activity is opened via button click from the StartScreen activity
 *@author Benjamin Li
 *@since 2018-03-29
  * @see Person
@@ -35,6 +36,7 @@ import java.util.Random;
  * @see Politician
  * @see Singer
  * @see Date
+ * @see StartScreen
  */
 public final class GuessMaster extends AppCompatActivity{
 	private int numOfEntities;
@@ -48,13 +50,15 @@ public final class GuessMaster extends AppCompatActivity{
 	private EditText userIn;
 	private int id;
 
-
+    /**constructor, initializes entity list to 10
+     *
+     */
 	public GuessMaster() {
 		numOfEntities = 0;
 		entities = new Entity[10];
 	}
 
-	/** add entity to the ArrayList
+	/** add entity to the array
 	*@param entity is of the type Entity
 	*/
 	public void addEntity(Entity entity) {
@@ -119,6 +123,10 @@ public final class GuessMaster extends AppCompatActivity{
 		setId(id);
 	}
 
+    /**formats the image so that the image is displayed as a circle
+     *
+     * @param drawable R.drawable id of the image that needs to be formatted
+     */
 	public void roundCornerFactory(int drawable) {
 		Resources res = getResources();
 		Bitmap src = BitmapFactory.decodeResource(res, drawable);
@@ -128,6 +136,10 @@ public final class GuessMaster extends AppCompatActivity{
 		entityImage.setImageDrawable(dr);
 	}
 
+    /**sets the imageView to the correct image based on the index that is passed in.
+     *
+     * @param index index of the entity in the entity[] array
+     */
 	public void imageSetter(int index){
 		switch (index){
 			case 0:
@@ -150,6 +162,10 @@ public final class GuessMaster extends AppCompatActivity{
 		}
 	}
 
+    /** opens up a welcome message dialog when the activity starts. informs the user of the entity name and type
+     *
+     * @param entity used to get the entity type
+     */
 	public void welcomeToGame(Entity entity) {
 		AlertDialog.Builder welcome = new AlertDialog.Builder(GuessMaster.this);
 		welcome.setTitle("GuessMaster Game V3")
@@ -163,15 +179,18 @@ public final class GuessMaster extends AppCompatActivity{
 		});
 		AlertDialog dialog = welcome.create();
 		dialog.show();
-		Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf");
+		Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf");  //set the font to something nicer looking
 		TextView message = (TextView) dialog.getWindow().findViewById(android.R.id.message);
 		TextView title = (TextView) dialog.getWindow().findViewById(android.R.id.message);
 		message.setTypeface(font);
 		title.setTypeface(font);
-		entityName.setText(entities[id].getName());
-		imageSetter(id);
+		entityName.setText(entities[id].getName()); //set the textView to the right entity name
+		imageSetter(id); //call the image setter to make sure the image underneath the dialog is correct
 	}
 
+    /** opens a dialog that informs the user that the date he/she chose was incorrect.
+     *
+     */
 	public void dialogLater() {
 		AlertDialog.Builder dialogLater = new AlertDialog.Builder(GuessMaster.this);
 		dialogLater.setTitle("Incorrect")
@@ -179,18 +198,21 @@ public final class GuessMaster extends AppCompatActivity{
 				.setNegativeButton("OK", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialogInterface, int i) {
-
+                //do nothing
 			}
 		});
 		AlertDialog dialog = dialogLater.create();
 		dialog.show();
-		Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf");
+		Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf"); //change the font to something nicer
 		TextView message = (TextView) dialog.getWindow().findViewById(android.R.id.message);
 		TextView title = (TextView) dialog.getWindow().findViewById(android.R.id.message);
 		message.setTypeface(font);
 		title.setTypeface(font);
 	}
 
+    /** opens a dialog that informs the user that the date he/she chose was incorrect.
+     *
+     */
 	public void dialogEarlier() {
 		AlertDialog.Builder dialogEarlier = new AlertDialog.Builder(GuessMaster.this);
 		dialogEarlier.setTitle("Incorrect")
@@ -198,18 +220,22 @@ public final class GuessMaster extends AppCompatActivity{
 				.setNegativeButton("OK", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialogInterface, int i) {
-
+                //do nothing
 			}
 		});
 		AlertDialog dialog = dialogEarlier.create();
 		dialog.show();
-		Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf");
+		Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf"); //make font something nicer
 		TextView message = (TextView) dialog.getWindow().findViewById(android.R.id.message);
 		TextView title = (TextView) dialog.getWindow().findViewById(android.R.id.message);
 		message.setTypeface(font);
 		title.setTypeface(font);
 	}
 
+    /**informs user through dialog box that their answer was correct. prints out additional info about the entity
+     *
+     * @param entity the entity that the user was trying to guess is passed into here to get the additional information
+     */
 	public void dialogCorrect(final Entity entity) {
 		AlertDialog.Builder correct = new AlertDialog.Builder(GuessMaster.this);
 		correct.setTitle("Correct!")
@@ -218,18 +244,21 @@ public final class GuessMaster extends AppCompatActivity{
 			@Override
 			public void onClick(DialogInterface dialogInterface, int i) {
 				Toast.makeText(getBaseContext(), "You won " + entity.getAwardedTicketNumber() + "tickets", Toast.LENGTH_SHORT).show();
-				continueGame();
+				continueGame(); //when the user hits continue, the next entity is loaded up through calling the continue game method
 			}
 		});
 		AlertDialog dialog = correct.create();
 		dialog.show();
-		Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf");
+		Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf"); //make the font look nice
 		TextView message = (TextView) dialog.getWindow().findViewById(android.R.id.message);
 		TextView title = (TextView) dialog.getWindow().findViewById(android.R.id.message);
 		message.setTypeface(font);
 		title.setTypeface(font);
 	}
 
+    /**Informs the user of an incorrect formal
+     * if there is an exception thrown when the user types in the date (i.e. incorrect format) the onCreate() calls
+     */
 	public void incorrectDialog(){
 		AlertDialog.Builder welcome = new AlertDialog.Builder(GuessMaster.this);
 		welcome.setTitle("Invalid Format")
@@ -244,22 +273,34 @@ public final class GuessMaster extends AppCompatActivity{
 				});
 		AlertDialog dialog = welcome.create();
 		dialog.show();
-        Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf"); //set the text to be something nicer looking
         TextView message = (TextView) dialog.getWindow().findViewById(android.R.id.message);
         TextView title = (TextView) dialog.getWindow().findViewById(android.R.id.message);
         message.setTypeface(font);
         title.setTypeface(font);
 	}
 
+    /**
+     * getter for the random ID generated
+     * @return integer of the id
+     */
 	public int getId(){
 		return id;
 	}
 
+    /**
+     * setter for the ID, called from the continueGame() method
+     * @param id integer id
+     */
 	public void setId(int id){
 		this.id = id;
 	}
 
 
+    /**
+     * oncreate method is called once when the activity loads. grabs the views from all the UI elements, declares functionality of buttons
+     * @param savedInstanceState default variable
+     */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -272,7 +313,7 @@ public final class GuessMaster extends AppCompatActivity{
 		entityImage = (ImageView) findViewById(R.id.entityImage);
 		ticketTotal = (TextView) findViewById(R.id.tickets);
 		entityName = (TextView) findViewById(R.id.entityName);
-		Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf");
+		Typeface font = Typeface.createFromAsset(getAssets(), "lato_regular.ttf"); //set font to something nicer
 		entityName.setTypeface(font);
 		ticketTotal.setTypeface(font);
 		guessButton.setTypeface(font);
@@ -287,15 +328,17 @@ public final class GuessMaster extends AppCompatActivity{
 		Person patrickStarMeme = new Person ("Patrick Star", new Date ("January", 1, 1900), 1, "Male");
 		Person flavorTown = new Person ("Guy Fieri", new Date("January", 22, 1968), 1, "Male");
 
-		ticketTotal.setText(getString(R.string.ticket, 0));
+		ticketTotal.setText(getString(R.string.ticket, 0)); //ensure that the ticket total is reset to 0
 		addEntity(trudeau);
 		addEntity(dion);
 		addEntity(usa);
 		addEntity(kendrickLamar);
 		addEntity(patrickStarMeme);
 		addEntity(flavorTown);
-		welcomeToGame(entities[0]);
+		welcomeToGame(entities[0]);//open the welcome to game dialog with first entity added to the array
 
+        //this is an inner class that declares the functionality of the EditText. in this case,
+        // it clears the text field when clicked if the default "MM/DD/YYYY" text is there
 		userIn.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View view) {
@@ -304,6 +347,9 @@ public final class GuessMaster extends AppCompatActivity{
 			}
 		});
 
+		//this is an inner class that declares the functionality of the "submit guess" button
+        // when clicked, it calls the playGame method and passes it the ID of the image and entityName that
+        // is currently loaded up on the screen
 		guessButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View view) {
@@ -311,6 +357,8 @@ public final class GuessMaster extends AppCompatActivity{
 			}
 		});
 
+		//this calls the continue game method when clicked, changing the imageView and text on screen to the next
+        // random entity
 		nextEntity.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View view) {
@@ -318,6 +366,8 @@ public final class GuessMaster extends AppCompatActivity{
 			}
 		});
 
+		//this is an inner class that listens for the enter key on the virtual keyboard. this way the user
+        // can submit their guessed date using the enter key as well as the submit button
 		userIn.setOnKeyListener(new View.OnKeyListener(){
 			@Override
 			public boolean onKey(View view, int i, KeyEvent keyEvent) {
