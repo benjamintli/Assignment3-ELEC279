@@ -159,6 +159,9 @@ public final class GuessMaster extends AppCompatActivity{
 				break;
 			case 5:
 				roundCornerFactory(R.drawable.guyfieri);
+				break;
+			case 6:
+				roundCornerFactory(R.drawable.kermit);
 		}
 	}
 
@@ -327,6 +330,7 @@ public final class GuessMaster extends AppCompatActivity{
 		Person kendrickLamar = new Person ("Kendrick Lamar", new Date ("June", 17, 1987), 0.5, "Male");
 		Person patrickStarMeme = new Person ("Patrick Star", new Date ("January", 1, 1900), 1, "Male");
 		Person flavorTown = new Person ("Guy Fieri", new Date("January", 22, 1968), 1, "Male");
+		Person kermit = new Person ("Kermit the Frog", new Date("May", 9, 1955), 1, "Male");
 
 		ticketTotal.setText(getString(R.string.ticket, 0)); //ensure that the ticket total is reset to 0
 		addEntity(trudeau);
@@ -335,6 +339,7 @@ public final class GuessMaster extends AppCompatActivity{
 		addEntity(kendrickLamar);
 		addEntity(patrickStarMeme);
 		addEntity(flavorTown);
+		addEntity(kermit);
 		welcomeToGame(entities[0]);//open the welcome to game dialog with first entity added to the array
 
         //this is an inner class that declares the functionality of the EditText. in this case,
