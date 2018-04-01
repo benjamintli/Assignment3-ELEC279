@@ -309,7 +309,7 @@ public final class GuessMaster extends AppCompatActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		android.support.v7.app.ActionBar ab = getSupportActionBar();
-		ab.setTitle(R.string.app_name);
+		ab.hide();
 		guessButton = (Button) findViewById(R.id.guessButton);
 		nextEntity = (Button) findViewById(R.id.nextEntity);
 		userIn = (EditText) findViewById(R.id.date);
