@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ticket"
-        android:textSize="24dp"
+        android:textSize="24sp"
         tools:layout_editor_absoluteX="305dp"
         android:paddingBottom="15dp"
         android:textColor="@color/white"/>
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:text="Shitty UI"
             android:gravity="center_horizontal"
-            android:textSize="32dp"
+            android:textSize="32sp"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:textColor="@color/white"/>
@@ -51,34 +51,27 @@
             android:text="@string/format"
             android:textColor="@color/white"
             android:background="@null"
-            android:paddingBottom="10dp"/>
+            android:paddingBottom="15dp"/>
 
         <TableRow>
             <Button
-                android:layout_width="match_parent"
+                android:layout_width="165dp"
                 android:layout_height="match_parent"
                 android:text="@string/guess_button"
-                android:layout_weight="1"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="10dp"
                 android:id="@+id/guessButton"
                 android:background="@drawable/transparent"
                 android:textColor="@color/white"/>
             <Button
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_width="165dp"
                 android:text="@string/next_entity"
-                android:layout_weight="1"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="5dp"
                 android:id = "@+id/nextEntity"
                 android:background="@drawable/transparent"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white" />
         </TableRow>
     </TableLayout>
-
-
-
-
-
 </LinearLayout>
