@@ -62,7 +62,8 @@
                 android:layout_marginStart="10dp"
                 android:id="@+id/guessButton"
                 android:background="@drawable/transparent"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:layout_weight="1"/>
             <Button
                 android:layout_height="match_parent"
                 android:layout_width="165dp"
@@ -71,7 +72,8 @@
                 android:layout_marginStart="5dp"
                 android:id = "@+id/nextEntity"
                 android:background="@drawable/transparent"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:layout_weight="1"/>
         </TableRow>
     </TableLayout>
 </LinearLayout>

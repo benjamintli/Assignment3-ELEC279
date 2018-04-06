@@ -6,6 +6,7 @@ package com.example.benjamin.guessmaster;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -18,6 +19,7 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -113,7 +115,7 @@ public final class GuessMaster extends AppCompatActivity{
      */
 	public void continueGame() {
 		Random rand = new Random();
-		// seeds RNG with random non-constant input
+		// seeds RNG
 		int id = rand.nextInt(numOfEntities);
 
 		imageSetter(id);
@@ -299,7 +301,10 @@ public final class GuessMaster extends AppCompatActivity{
 		this.id = id;
 	}
 
-
+	public int randGen () {
+		Random rand = new Random();
+		return rand.nextInt(numOfEntities);
+	}
     /**
      * oncreate method is called once when the activity loads. grabs the views from all the UI elements, declares functionality of buttons
      * @param savedInstanceState default variable
@@ -340,7 +345,7 @@ public final class GuessMaster extends AppCompatActivity{
 		addEntity(patrickStarMeme);
 		addEntity(flavorTown);
 		addEntity(kermit);
-		welcomeToGame(entities[0]);//open the welcome to game dialog with first entity added to the array
+		welcomeToGame(entities[randGen()]);//open the welcome to game dialog with first entity added to the array
 
         //this is an inner class that declares the functionality of the EditText. in this case,
         // it clears the text field when clicked if the default "MM/DD/YYYY" text is there
@@ -358,6 +363,9 @@ public final class GuessMaster extends AppCompatActivity{
 		guessButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View view) {
+				InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(
+						userIn.getWindowToken(), 0);
 				playGame(entities[getId()]);
 			}
 		});
